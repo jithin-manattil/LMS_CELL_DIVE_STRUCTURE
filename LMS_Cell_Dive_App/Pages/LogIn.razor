@@ -1,0 +1,145 @@
+﻿@page "/"
+@using CellDiveServices
+@inject NavigationManager NavigationManager
+@inject CellDive.AssistService cellDive
+<body style="background-image: url('/Images/MainBackground.png');">
+    <div style="height: 730px;">
+        <div class="login-wrap">
+            <div class="login-card">              
+               
+                <div class="row mb-2">
+                    <div class="col col-xl-12">
+                        <h1 style="font-family: initial;">Welcome Back</h1>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col col-xl-12">
+                        <h5 style="padding-left:10px;color:#847373;font-family: initial;">Please log in</h5>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col col-xl-12">
+                        <input type="text" class="form-control input-login" id="user-name" autocomplete="off" maxlength="30" placeholder="User Name" @bind="@userName" />
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col col-xl-12">
+                        <input type="password" class="form-control input-login" id="password" autocomplete="off" maxlength="30" placeholder="Password" @bind="@password" />
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <button type="button" @onclick="@Login" class=" col-lg-5 btnCss">LOG IN TO PRS</button>
+                    <div class="col-lg"></div>
+                    <button type="button" class=" col-lg-5 btnCss ">ABOUT</button>
+
+
+                </div>
+                <div class="row">
+                    @if (cellDive.logInResponse != null)
+                    {
+                        if (cellDive.logInResponse.IsLoggedIntoSystem)
+                        {
+                            <p style="color:forestgreen">Success!!!</p>
+                        }
+                        else
+                        {
+                            <p style="color:red;font-size:10px">*Please enter valid User Name and Password</p>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+@code {
+    string userName = "";
+    string password = "";
+
+
+
+    public void Login()
+    {
+        try
+        {
+            cellDive.logInRequest.UserName = userName;
+            cellDive.logInRequest.Password = password;
+            var response = cellDive.asistServiceClient.LogInAsync(cellDive.logInRequest);
+            if (response.Result != null)
+            {
+                cellDive.logInResponse = response.Result;
+                string url = "/Worklist";
+
+                if (cellDive.logInResponse.IsLoggedIntoSystem)
+                {
+                    NavigationManager.NavigateTo(url);
+
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+
+            throw ex;
+        }
+
+    }
+}
+
+
+<style type="text/css">
+    .content {
+        padding-top: 0px !important;
+    }
+
+    .main > div[b-ooz39hrj9s] {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+
+    .login-wrap {
+        width: 470px;
+        height: 310px;
+        background-color: whitesmoke;
+        display: inline-block;
+        top: 30%;
+        left: 35%;
+        position: absolute;
+        -webkit-box-shadow: rgba(0,0,0,0.8) 0px 0 10px;
+        -moz-box-shadow: rgba(0,0,0,0.8) 0 0 10px;
+        box-shadow: rgba(0,0,0,0.8) 0 0 10px;
+        border-radius: 10px;
+        padding: 40px 40px 20px 40px;
+    }
+
+
+    .input-login {
+        border-style: solid;
+        border-color: #a9a4a4;
+        border-width: 2px;
+    }
+
+    .btnCss {
+        background-color: black;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 40%;
+        font: size 18px;
+        padding: 10px;
+        border: whitesmoke;
+    }
+
+    .btn-login {
+        background-image: linear-gradient(#585858,black );
+        color: white;
+        font-weight: bold;
+        margin-left: 16px;
+        font-family: initial;
+    }
+
+        .btn-login :hover {
+            color: white;
+        }
+</style>

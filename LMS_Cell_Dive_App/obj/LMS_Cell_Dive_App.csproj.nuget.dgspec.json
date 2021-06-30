@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projects\\LMS_CELL_DIVE_STRUCTURE\\LMS_Cell_Dive_App\\LMS_Cell_Dive_App.csproj": {}
+    "C:\\Users\\Administrator\\Documents\\Working\\LMS_New\\LMS_Cell_Dive_App\\LMS_Cell_Dive_App.csproj": {}
   },
   "projects": {
-    "D:\\Projects\\LMS_CELL_DIVE_STRUCTURE\\LMS_Cell_Dive_App\\LMS_Cell_Dive_App.csproj": {
+    "C:\\Users\\Administrator\\Documents\\Working\\LMS_New\\LMS_Cell_Dive_App\\LMS_Cell_Dive_App.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\LMS_CELL_DIVE_STRUCTURE\\LMS_Cell_Dive_App\\LMS_Cell_Dive_App.csproj",
+        "projectUniqueName": "C:\\Users\\Administrator\\Documents\\Working\\LMS_New\\LMS_Cell_Dive_App\\LMS_Cell_Dive_App.csproj",
         "projectName": "LMS_Cell_Dive_App",
-        "projectPath": "D:\\Projects\\LMS_CELL_DIVE_STRUCTURE\\LMS_Cell_Dive_App\\LMS_Cell_Dive_App.csproj",
-        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\LMS_CELL_DIVE_STRUCTURE\\LMS_Cell_Dive_App\\obj\\",
+        "projectPath": "C:\\Users\\Administrator\\Documents\\Working\\LMS_New\\LMS_Cell_Dive_App\\LMS_Cell_Dive_App.csproj",
+        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Administrator\\Documents\\Working\\LMS_New\\LMS_Cell_Dive_App\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -39,6 +39,24 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "System.ServiceModel.Duplex": {
+              "target": "Package",
+              "version": "[4.4.*, )"
+            },
+            "System.ServiceModel.Http": {
+              "target": "Package",
+              "version": "[4.4.*, )"
+            },
+            "System.ServiceModel.NetTcp": {
+              "target": "Package",
+              "version": "[4.4.*, )"
+            },
+            "System.ServiceModel.Security": {
+              "target": "Package",
+              "version": "[4.4.*, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

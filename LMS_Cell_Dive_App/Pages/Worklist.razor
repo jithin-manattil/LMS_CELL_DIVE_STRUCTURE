@@ -1,0 +1,55 @@
+﻿@page "/Worklist"
+@using CellDiveServices
+@inject CellDive.AssistService cellDive
+<h3 style="color:#f4f1f1">Cell DIVE Worklist</h3>
+@{GetWorklist();}
+<div class="col-sm-2">
+    @*<button @onclick="@GetWorklist" class="btn btn-outline-success">Get Worklist</button>*@
+</div>
+<div class="row" style="padding-top:10px;background-color:#adaaaa">
+    @if (cellDive.workListResponse == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Slide ID</th>
+                    <th>Priority</th>
+                    <th>Multiplex Test</th>
+                    <th>Date Created</th>
+                    @*<th>Actions</th>*@
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var list in cellDive.workListResponse.WorkListData)
+                {
+                    <tr>
+                        <td>@list.SlideId</td>
+                        <td>@list.Priority.Value</td>
+                        <td>@list.EntryScreenType.Value</td>
+                        <td>@list.AccessionDate.ToString()</td>
+                        @*<td>@list.CheckedOutTo.UserName</td>*@
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+@code {
+
+    //private CellDiveServices.WorkListResponse workListResponses;
+    CellDiveServices.AsistServiceClient asistServiceClient = new AsistServiceClient();
+   
+    public void GetWorklist()
+    {
+        cellDive.workListRequest.ClientTime = DateTime.Now;
+        cellDive.workListRequest.SystemUserId = cellDive.logInResponse.SystemUser.SystemUserId;
+        cellDive.workListRequest.Token = cellDive.logInResponse.Token;
+        var worklist = asistServiceClient.GetUserWorkListAsync(cellDive.workListRequest);
+        cellDive.workListResponse = worklist.Result;
+
+    }
+}
